@@ -58,20 +58,20 @@ jobs:
 
           df -h
 
-      - name: 自定义插件主题。
-        run: |
-          cd package
-          mkdir openwrt-packages
-          cd openwrt-packages
+      # - name: 自定义插件主题。
+      #   run: |
+      #     cd package
+      #     mkdir openwrt-packages
+      #     cd openwrt-packages
           # git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git
           # git clone https://github.com/Ameykyl/luci-app-koolproxyR
-          https://github.com/liuran001/openwrt-packages
+          # https://github.com/liuran001/openwrt-packages
  
 
       - name: Update feeds
         run: |
-          # echo 'src-git liuran001 https://github.com/liuran001/openwrt-packages' >> ./feeds.conf.default
-          # sed -i 's/\"#src-git\"/\"src-git\"/g' ./feeds.conf.default
+          echo 'src-git liuran001 https://github.com/liuran001/openwrt-packages' >> ./feeds.conf.default
+          sed -i 's/\"#src-git\"/\"src-git\"/g' ./feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
@@ -203,7 +203,7 @@ jobs:
           CONFIG_PACKAGE_luci-theme-argon-mc=y
           CONFIG_PACKAGE_luci-theme-argon-mod=y
           CONFIG_PACKAGE_luci-theme-argon_new=y
-          CONFIG_PACKAGE_luci-theme-rosy=y
+          # CONFIG_PACKAGE_luci-theme-rosy=y
           EOF
 
           # 常用软件包:
