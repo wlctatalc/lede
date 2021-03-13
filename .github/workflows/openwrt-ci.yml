@@ -63,10 +63,10 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git
-          git clone https://github.com/Ameykyl/luci-app-koolproxyR
-          git clone https://github.com/rosywrt/luci-theme-rosy
-          git clone https://github.com/liuran001/openwrt-packages
+          # git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git
+          # git clone https://github.com/Ameykyl/luci-app-koolproxyR
+          https://github.com/liuran001/openwrt-packages
+ 
 
       - name: Update feeds
         run: |
