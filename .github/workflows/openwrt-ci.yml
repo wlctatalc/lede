@@ -66,11 +66,12 @@ jobs:
           git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git
           git clone https://github.com/Ameykyl/luci-app-koolproxyR
           git clone https://github.com/rosywrt/luci-theme-rosy
+          git clone https://github.com/liuran001/openwrt-packages
 
       - name: Update feeds
         run: |
-          echo 'src-git liuran001 https://github.com/liuran001/openwrt-packages' >> ./feeds.conf.default
-          sed -i 's/\"#src-git\"/\"src-git\"/g' ./feeds.conf.default
+      #     echo 'src-git liuran001 https://github.com/liuran001/openwrt-packages' >> ./feeds.conf.default
+      #     sed -i 's/\"#src-git\"/\"src-git\"/g' ./feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
