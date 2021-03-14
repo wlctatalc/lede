@@ -58,22 +58,28 @@ jobs:
 
           df -h
 
-      # - name: 自定义插件主题。
-      #   run: |
-      #     cd package
-      #     mkdir openwrt-packages
-      #     cd openwrt-packages
-          # git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git
-          # git clone https://github.com/Ameykyl/luci-app-koolproxyR
-          # https://github.com/liuran001/openwrt-packages
- 
-
-      - name: Update feeds
+      - name: 自定义插件主题。
         run: |
-          echo 'src-git liuran001 https://github.com/liuran001/openwrt-packages' >> ./feeds.conf.default
-          sed -i 's/\"#src-git\"/\"src-git\"/g' ./feeds.conf.default
-          ./scripts/feeds update -a
-          ./scripts/feeds install -a
+          cd package
+          mkdir openwrt-packages
+          cd openwrt-packages
+          git clone https://github.com/kenzok8/openwrt-packages.git
+          git clone https://github.com/kenzok8/small.git
+      
+      #- name: 自定义安装源
+      #  working-directory: ./openwrt
+      #  run: |
+      #    git clone https://github.com/kenzok8/openwrt-packages package/kenzo
+      #    git clone https://github.com/kenzok8/small package/small
+      #    git clone https://github.com/xiaorouji/openwrt-passwall package/openwrt-passwall
+
+      #- name: Update feeds
+      #  run: |
+      #    echo 'src-git kenzo https://github.com/kenzok8/openwrt-packages' >> ./feeds.conf.default
+      #    echo 'src-git small https://github.com/kenzok8/small' >> ./feeds.conf.default
+      #    sed -i 's/\"#src-git\"/\"src-git\"/g' ./feeds.conf.default
+      #    ./scripts/feeds update -a
+      #    ./scripts/feeds install -a
 
       - name: Generate configuration file
         run: |
@@ -129,6 +135,12 @@ jobs:
           # cat >> .config <<EOF
           # CONFIG_EFI_IMAGES=y
           # EOF
+          
+          # 设置固件大小:
+          cat >> .config <<EOF
+          CONFIG_TARGET_KERNEL_PARTSIZE=32
+          CONFIG_TARGET_ROOTFS_PARTSIZE=320
+          EOF
 
           # IPv6支持:
           cat >> .config <<EOF
@@ -159,7 +171,7 @@ jobs:
           cat >> .config <<EOF
           CONFIG_PACKAGE_luci-app-adbyby-plus=y
           # CONFIG_PACKAGE_luci-app-aria2=y
-          CONFIG_PACKAGE_luci-app-baidupcs-web=y
+          # CONFIG_PACKAGE_luci-app-baidupcs-web=y
           CONFIG_PACKAGE_luci-app-docker=y
           CONFIG_PACKAGE_luci-app-frpc=y
           CONFIG_PACKAGE_luci-app-hd-idle=y
@@ -167,7 +179,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-minidlna=y
           CONFIG_PACKAGE_luci-app-openvpn=y
           CONFIG_PACKAGE_luci-app-openvpn-server=y
-          CONFIG_PACKAGE_luci-app-qbittorrent=y
+          # CONFIG_PACKAGE_luci-app-qbittorrent=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
@@ -179,11 +191,11 @@ jobs:
           CONFIG_PACKAGE_luci-app-webadmin=y
           CONFIG_PACKAGE_luci-app-wireguard=y
           CONFIG_PACKAGE_luci-app-wrtbwmon=y
-          CONFIG_PACKAGE_luci-app-argon-config=y
+          # CONFIG_PACKAGE_luci-app-argon-config=y
           CONFIG_PACKAGE_luci-app-filetransfer=y
           CONFIG_PACKAGE_luci-app-vlmcsd=y
           CONFIG_PACKAGE_luci-app-adguardhome=y
-          CONFIG_PACKAGE_luci-app-passwall-plus=y
+          CONFIG_PACKAGE_luci-luci-app-passwall=y
           CONFIG_PACKAGE_luci-app-vssr=y
           CONFIG_PACKAGE_luci-app-jd-dailybonus=y
           CONFIG_PACKAGE_luci-app-music-remote-center=y
@@ -201,6 +213,7 @@ jobs:
           cat >> .config <<EOF
           CONFIG_PACKAGE_luci-theme-argon=y
           CONFIG_PACKAGE_luci-theme-netgear=y
+          CONFIG_PACKAGE_luci-theme-argon_new=y
           # CONFIG_PACKAGE_luci-theme-argon-lr=y
           # CONFIG_PACKAGE_luci-theme-argon-mc=y
           # CONFIG_PACKAGE_luci-theme-argon-mod=y
