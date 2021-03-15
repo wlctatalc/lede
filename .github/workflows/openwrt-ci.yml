@@ -137,10 +137,10 @@ jobs:
           # EOF
           
           # 设置固件大小:
-          cat >> .config <<EOF
-          CONFIG_TARGET_KERNEL_PARTSIZE=32
-          CONFIG_TARGET_ROOTFS_PARTSIZE=320
-          EOF
+          # cat >> .config <<EOF
+          # CONFIG_TARGET_KERNEL_PARTSIZE=32
+          # CONFIG_TARGET_ROOTFS_PARTSIZE=320
+          # EOF
 
           # IPv6支持:
           cat >> .config <<EOF
